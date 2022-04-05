@@ -1,5 +1,8 @@
 package com.pattplayz.thrc;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class HeartRates {
     private String firstName;
     private String lastName;
@@ -64,5 +67,18 @@ public class HeartRates {
     // Sets year of birth
     public void setDobYear(int dobYear) {
         this.dobYear = dobYear;
+    }
+
+    // Calculates age
+    public int calculateAge() {
+        LocalDate birthDate = LocalDate.of(dobYear, dobMonth, dobDay);
+        LocalDate now = LocalDate.now();
+        long years = ChronoUnit.YEARS.between(birthDate, now);
+        return (int) years;
+    }
+
+    // Calculates target heart rate
+    public double calculateTargetHR() {
+        return 220 - calculateAge();
     }
 }
